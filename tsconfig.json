@@ -1,16 +1,18 @@
 {
-    "compilerOptions": {
-        "target": "ES2022",
-        "lib": ["ES2023"],
-
-        "paths": {
-            "@/*":["./src/*"],
-        },
-
-        "module": "node16",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "skipLibCheck": true
-    }
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "CommonJS",                      // <- ESSENCIAL pro CLI do knex funcionar bem
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": ".",                            // <- NECESSÁRIO pra funcionar o "paths"
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "dist"                           // <- (opcional, mas recomendado se for compilar depois)
+  },
+  "include": ["src/**/*", "knexfile.ts"]
 }
