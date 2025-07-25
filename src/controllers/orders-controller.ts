@@ -36,12 +36,26 @@ class OrdersController {
                 product_id,
                 quantity,
                 price:product.price,
-                
             })
 
             return res.json(session)
         } catch (error) {
             next(error )
+        }
+    }
+
+    async index(req:Request, res:Response, next:NextFunction){
+        try {
+            const { table_session_id } = req.params
+
+            const order = await knex("orders")
+                .select("orders.id", "order.table_session_id", "orders.product_id", "product.name", "orders.price", "orders.quantity")
+                .join("products", "products.id", "orders.product_id")
+                .where({ table_session_id })
+
+            return res.json(order)
+        } catch (error) {
+            next(error)
         }
     }
 }
