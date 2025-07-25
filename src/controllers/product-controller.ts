@@ -37,6 +37,21 @@ class ProductController {
         }
     }
 
+    async update(req:Request, res:Response, next:NextFunction){
+        try {
+            const bodySchema = z
+            .string()
+            .transform((value)=>Number(value))
+            .refine((value)=> !isNaN(value), { message: "id must be a number" }) 
+            const id = bodySchema.parse(req.params.id)
+
+            return res.status(200).json({message:`Product ${id} has been updated successfully!`})
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export { ProductController }
